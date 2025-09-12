@@ -1,0 +1,50 @@
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+}
+
+android {
+    namespace = "com.mycir.kodiproxy"
+    compileSdk = 34
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            // Compose new name: <applicationId>.apk
+            def appId = variant.applicationId
+            def newApkName = "${appId}.apk"
+            outputFileName = newApkName
+        }
+    }    
+
+    defaultConfig {
+        applicationId = "com.mycir.kodiproxy"
+        minSdk = 24
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0"
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    kotlinOptions {
+        jvmTarget = "21"
+    }    
+
+    buildTypes {
+        release {
+            minifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+}
+
+dependencies {
+    implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.appcompat:appcompat:1.7.0")
+}
