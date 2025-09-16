@@ -10,6 +10,6 @@ KodiProxy is a minimal app that just launches Kodi, then closes. Since the app l
 | :--------------------------------: | :------------------------------------------: |
 | ![kodi](screenshots/kodi-tile.png) | ![kodiproxy](screenshots/kodiproxy-tile.png) |
 
-A release APK is available [here](releases/tag/v1.0).
+A release APK is available [here](https://github.com/octo-org/octo-repo/releases/latest).
 
 KodiProxy is based on guidance and template code from [ChatGPT (OpenAI)](https://chatgpt.com/). The Kodi logo, © the [Kodi Foundation](https://kodi.wiki/view/XBMC_Foundation), is used in accordance with [Official:Visual Identity Guidelines](https://kodi.wiki/view/Official:Visual_Identity_Guidelines).
