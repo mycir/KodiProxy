@@ -3,20 +3,31 @@
         android:allowBackup="false"
         android:icon="@mipmap/ic_kodi_launcher"
         android:banner="@mipmap/ic_kodi_banner"
-        android:label="Kodi Proxy"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        android:label="Kodi Proxy">
 
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:launchMode="singleTask">
-
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
         </activity>
-
     </application>
+
+    <queries>
+        <package android:name="org.xbmc.kodi" />
+    </queries>
+
+    <uses-feature 
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <uses-feature 
+        android:name="android.software.leanback"
+        android:required="false" />
 </manifest>

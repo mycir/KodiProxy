@@ -9,9 +9,9 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
-            // Compose new name: <applicationId>.apk
             def appId = variant.applicationId
-            def newApkName = "${appId}.apk"
+            def appVersion = variant.versionName
+            def newApkName = "${appId}_${variant.versionName}.apk"
             outputFileName = newApkName
         }
     }    
@@ -31,6 +31,26 @@ android {
 
     kotlinOptions {
         jvmTarget = "21"
+    }
+
+    signingConfigs {
+        release {
+            // supply your own keystore.properties
+            def keystorePropsFile =  rootProject.file("keystore.properties")
+            def keystoreProps = new Properties()
+
+            if (keystorePropsFile.exists()) {
+                keystoreProps.load(new FileInputStream(keystorePropsFile))
+            }   
+            storeFile file(keystoreProps["KP_KEYSTORE"])
+            storePassword keystoreProps["KP_STORE_PASSWORD"]
+            keyAlias keystoreProps["KP_ALIAS"]
+            keyPassword keystoreProps["KP_KEY_PASSWORD"]
+            enableV1Signing = false
+            enableV2Signing = true
+            enableV3Signing = true
+            enableV4Signing = false
+        }
     }    
 
     buildTypes {
@@ -40,11 +60,21 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.debug
         }
     }
 }
 
-dependencies {
-    implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.appcompat:appcompat:1.7.0")
+    dependencies {
+        implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.10"
+        implementation 'androidx.core:core-ktx:1.12.0'
+    }
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
 }
